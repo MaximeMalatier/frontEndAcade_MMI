@@ -1,0 +1,33 @@
+<form @submit.prevent="creer">
+  <h5>Création Tuto</h5>
+
+  <label for="title-tuto">Titre du Tuto</label>
+  <input id="title-tuto" placeholder="Titre du tuto"
+         v-model="tuto.title_tuto" required>
+
+
+  <label for="url-tuto">Titre du Tuto</label>
+  <input id="url-tuto" placeholder="Url de la vidéo du tuto"
+         v-model="tuto.url_video_tuto" required>
+
+  <label for="description-tuto">Titre du Tuto</label>
+  <input id="description-tuto" placeholder="Description du tuto"
+         v-model="tuto.description_tuto" required>
+
+  <label for="post-date-tuto">Titre du Tuto</label>
+  <input id="post-date-tuto" placeholder="Description du tuto"
+         v-model="tuto.post_date_tuto" >
+
+  <select  v-model="tuto.acf.school_subject_tuto">
+    <option selected disabled>Selectionner une matière</option>
+    <option v-for="school_subject in listeOrderByName" :key="school_subject.id" :value="school_subject.id">{{school_subject.acf.name_school_subject}}</option>
+  </select>
+
+  <button type="submit">
+    Creer
+  </button>
+
+  <button>
+    <router-link to="/">Cancel</router-link>
+  </button>
+</form>
