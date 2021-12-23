@@ -5,8 +5,9 @@ import Router from 'vue-router'
 import Home from "@/components/home";
 import Search from "@/components/search";
 import Profile from "@/components/profile";
-import Favorites from "@/components/favorites";
+import Discord from "@/components/discord";
 import SchoolSubject from "@/components/school_subject";
+
 
 
 Vue.use(Router)
@@ -28,9 +29,9 @@ export default new Router({
 
 
     {
-      path: '/favorites',
-      name: 'Favorites',
-      component: Favorites
+      path: '/discord',
+      name: 'Discord',
+      component: Discord
     },
 
     {

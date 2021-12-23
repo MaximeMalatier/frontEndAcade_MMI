@@ -87,7 +87,7 @@
       <div class="school_subject">
 
 
-          <router-link class="schoolsub" v-for="school_subject in liste" :key="school_subject.id"  :to="'school_subject/' +school_subject.id">
+          <router-link class="schoolsub" v-for="school_subject in listeOrderByName" :key="school_subject.id"  :to="'school_subject/' +school_subject.id">
 
             <h3>{{school_subject.acf.name_school_subject}}</h3>
 
@@ -114,12 +114,12 @@ export default {
     return{
       liste:[],
       listeTuto:[],
-      firstTuto:[]
+      firstTuto:[],
     }
   },
 
   created() {
-    axios.get(param.host+"school_subject")
+    axios.get(param.host+"school_subject?per_page=100")
     .then(response=>{
       console.log("Response", response);
 
@@ -142,6 +142,17 @@ export default {
         console.log("Liste", this.listeTuto);
       })
       .catch(error=>console.log(error))
+  },
+
+  computed: {
+    listeOrderByName: function (){
+      function compare(a, b){
+        if (a.acf.name_school_subject < b.acf.name_school_subject) return -1;
+        if (a.acf.name_school_subject > b.acf.name_school_subject) return 1;
+        return 0;
+      }
+      return this.liste.sort(compare)
+    }
   }
 }
 

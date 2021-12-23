@@ -30,27 +30,14 @@
         </svg>
 
       <div class="container">
-        <div class="school-videos">
-          <figure >
-          <iframe class="left-video-iframe" src="https://www.youtube.com/embed/yLwna-7DqnI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          <figcaption>par Xavier Senente 05/09/2019</figcaption>
-        </figure>
-          <figure>
-            <iframe src="http://www.youtube.com/embed/watch?v=xv-XKENVnlk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <figcaption>par Xavier Senente 05/09/2019</figcaption>
-          </figure>
-          <figure>
-            <iframe src="http://www.youtube.com/embed/watch?v=xv-XKENVnlk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <figcaption>par Xavier Senente 05/09/2019</figcaption>
-          </figure>
-      </div>
+        <li v-for="tuto in tutoFilter" :key="tuto.id">
+          <iframe class="left-video-iframe" :src="tuto.acf.url_video_tuto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <figcaption>par {{tuto.acf.publisher_tuto.nickname}} {{tuto.acf.post_date_tuto}}</figcaption>
+        </li>
+
 
       </div>
 
-      <li v-for="tuto in listeTuto" :key="tuto.id">
-        <iframe class="left-video-iframe" :src="tuto.acf.url_video_tuto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <figcaption>par {{tuto.acf.publisher_tuto.nickname}} {{tuto.acf.post_date_tuto}}</figcaption>
-      </li>
 
 
 
@@ -64,31 +51,57 @@ import param from "../param/param";
 export default {
   tuto: 'tuto',
   name: 'school_subject',
-  data(){
-    return{
-      school_subject:[],
-      listeTuto:[]
+  data() {
+    return {
+      school_subject: [],
+      idSchoolSub: [],
+      listeTuto: [],
+
     }
   },
 
   created() {
-    axios.get(param.host+"school_subject/" +this.$route.params.id)
-      .then(response=>{
+    axios.get(param.host + "school_subject/" + this.$route.params.id)
+      .then(response => {
         console.log("Response", response);
 
         this.school_subject = response.data;
+        this.idSchoolSub = this.school_subject.id;
       })
 
-      .catch(error=>console.log(error))
+      .catch(error => console.log(error))
 
 
-    axios.get(param.host+"tuto")
-      .then(response=>{
+    axios.get(param.host + "tuto")
+      .then(response => {
         this.listeTuto = response.data;
         console.log("Liste", this.listeTuto);
       })
-      .catch(error=>console.log(error))
-}
+      .catch(error => console.log(error))
+
+
+  },
+  computed: {
+    tutoFilter: function () {
+      return this.listeTuto.filter(function (tuto) {
+        // On ne recupere que les ID des type_video de la vidéo avec map()
+        let typeTuto = tuto.acf.school_subject_tuto.map(function (type) {
+          return type.ID
+        });
+        // On ne renvoie que les vidéos correspondantes au type concerné
+//                return (typeVideo.indexOf(param.typeFilm) >= 0 ? param.typeFilm : '');
+        return (typeTuto.indexOf(this.idSchoolSub) >= 0 ? this.idSchoolSub : '');
+      }.bind(this))
+    }
+
+  },
+  // methods:{
+  //   bySchoolSubject: function (schoolsub){
+  //     return this.listeTuto.filter(function (tuto){
+  //       return tuto.acf.school_subject_tuto.id === schoolsub
+  //     })
+  //   }
+  // }
 }
 </script>
 

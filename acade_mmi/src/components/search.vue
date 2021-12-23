@@ -16,21 +16,18 @@
 
           <div class="container_video">
 
-            <figure class="left-video">
-              <iframe class="left-video-iframe" src="http://www.youtube.com/embed/watch?v=xv-XKENVnlk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-              <figcaption>par Xavier Senente 05/09/2019</figcaption>
+            <figure class="left-video" v-for="tuto in listeTuto" :key="tuto.id">
+              <iframe class="left-video-iframe" :src="tuto.acf.url_video_tuto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <figcaption>par {{tuto.acf.publisher_tuto.nickname}} {{tuto.acf.post_date_tuto}}"</figcaption>
             </figure>
 
             <div class="video_right">
-              <figure>
-                <iframe src="http://www.youtube.com/embed/watch?v=xv-XKENVnlk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                <figcaption>par Xavier Senente 05/09/2019</figcaption>
-              </figure>
 
-              <figure>
-                <iframe src="http://www.youtube.com/embed/watch?v=xv-XKENVnlk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                <figcaption>par Xavier Senente 05/09/2019</figcaption>
-              </figure>
+                <figure v-for="tuto in listeTuto" :key="tuto.id">
+                  <iframe :src="tuto.acf.url_video_tuto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                  <figcaption>par {{tuto.acf.publisher_tuto.nickname}} {{tuto.acf.post_date_tuto}}</figcaption>
+                </figure>
+
             </div>
           </div>
         </div>
@@ -41,51 +38,38 @@
 
             <div class="container_video">
 
-                <figure class="left-video">
-                  <iframe class="left-video-iframe" src="http://www.youtube.com/embed/watch?v=xv-XKENVnlk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                  <figcaption>par Xavier Senente 05/09/2019</figcaption>
-                </figure>
+              <figure class="left-video" v-for="tuto in listeTuto" :key="tuto.id">
+                <iframe class="left-video-iframe" :src="tuto.acf.url_video_tuto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <figcaption>par {{tuto.acf.publisher_tuto.nickname}} {{tuto.acf.post_date_tuto}}"</figcaption>
+              </figure>
 
 
               <div class="video_right">
-                <figure>
-                  <iframe src="http://www.youtube.com/embed/watch?v=xv-XKENVnlk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                  <figcaption>par Xavier Senente 05/09/2019</figcaption>
+                <figure v-for="tuto in listeTuto" :key="tuto.id">
+                  <iframe :src="tuto.acf.url_video_tuto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                  <figcaption>par {{tuto.acf.publisher_tuto.nickname}} {{tuto.acf.post_date_tuto}}</figcaption>
                 </figure>
 
-
-
-                <figure>
-                  <iframe src="http://www.youtube.com/embed/watch?v=xv-XKENVnlk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                  <figcaption>par Xavier Senente 05/09/2019</figcaption>
-                </figure>
 
               </div>
             </div>
           </div>
 
-          <div class="populars">
+          <div class="dev">
             <h2>Développement</h2>
 
             <div class="container_video">
 
-              <figure class="left-video">
-                <iframe class="left-video-iframe" src="http://www.youtube.com/embed/watch?v=xv-XKENVnlk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                <figcaption>par Xavier Senente 05/09/2019</figcaption>
+              <figure class="left-video" v-for="tuto in listeTuto" :key="tuto.id">
+                <iframe class="left-video-iframe" :src="tuto.acf.url_video_tuto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <figcaption>par {{tuto.acf.publisher_tuto.nickname}} {{tuto.acf.post_date_tuto}}"</figcaption>
               </figure>
 
 
               <div class="video_right">
-                <figure>
-                  <iframe src="http://www.youtube.com/embed/watch?v=xv-XKENVnlk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                  <figcaption>par Xavier Senente 05/09/2019</figcaption>
-                </figure>
-
-
-
-                <figure>
-                  <iframe src="http://www.youtube.com/embed/watch?v=xv-XKENVnlk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                  <figcaption>par Xavier Senente 05/09/2019</figcaption>
+                <figure v-for="tuto in listeTuto" :key="tuto.id">
+                  <iframe :src="tuto.acf.url_video_tuto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                  <figcaption>par {{tuto.acf.publisher_tuto.nickname}} {{tuto.acf.post_date_tuto}}</figcaption>
                 </figure>
 
               </div>
@@ -99,7 +83,45 @@
 
 </template>
 
+<script>
+import param from "../param/param";
 
+export default {
+  name: 'listeSchoolSubject',
+  tuto: 'tuto',
+  data(){
+    return{
+      liste:[],
+      listeTuto:[],
+      firstTuto:[]
+    }
+  },
+
+  created() {
+    axios.get(param.host+"school_subject")
+      .then(response=>{
+        console.log("Response", response);
+
+        this.liste = response.data;
+      })
+
+      .catch(error=>console.log(error))
+
+    axios.get(param.host+"tuto")
+      .then(response=>{
+        this.listeTuto = response.data;
+        console.log("Liste", this.listeTuto);
+      })
+      .catch(error=>console.log(error))
+
+  },
+
+};
+
+
+
+
+</script>
 <style scoped>
 h1{
   color: #F1EDDD;
@@ -170,6 +192,7 @@ h2{
   width: auto;
 
 
+
 }
 
 .left-video{
@@ -182,13 +205,31 @@ h2{
   height: 400px;
 }
 
-.video_right figure{
-
-}
-
 .video_right figure iframe {
   width: 400px;
   height: 200px;
 }
 
+.video_right{
+  overflow-y: auto;
+  max-height: 500px;
+  width: 60%;
+}
+
+.container_video .left-video{
+  display: none;
+}
+#app > div > main > div.proposition > div.last-trends > div > figure:nth-child(1){
+  display: block;
+
+}
+
+#app > div > main > div.proposition > div.populars > div > figure:nth-child(1){
+  display: block;
+
+}
+
+#app > div > main > div.proposition > div.dev > div > figure:nth-child(1){
+  display: block;
+}
 </style>

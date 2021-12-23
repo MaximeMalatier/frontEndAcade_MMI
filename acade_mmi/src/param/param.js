@@ -1,8 +1,9 @@
 export default {
   host : 'http://localhost/acade_mmi/wordpress/wp-json/wp/v2/',
 
+  hostTuto: 'http://localhost/acade_mmi/wordpress/wp-json/tuto/v1/',
 
-  auth: 'http://localhost/acade_mmi/wordpress/wp-json/jwt-auth/v1/token',
+  auth: 'http://localhost/acade_mmi/wordpress/wp-json/jwt-auth/v1/',
   user: 'admin1709',
   psw: '&RWW@qvK65kkFBasIG',
 
@@ -25,4 +26,14 @@ export default {
   school_subject_PPP: 60,
   school_subject_GestionContenu: 61,
   school_subject_SystemeInfo: 62,
+
+  // titre de l'app
+
+  titre: "Academmi",
+
+  message : {
+    errCnx :        "Les éléments d'identification ne permettent pas d'accéder à l'application",
+    errAcces :      "Vous n'avez pas les droits nécessaires pour accéder à cette page"
+  }
+
 }
