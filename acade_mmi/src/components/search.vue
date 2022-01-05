@@ -2,82 +2,42 @@
 
     <main>
 
+      <div class="title-app">
+        <router-link to="/">
+          <h1>Acade'MMI </h1>
+        </router-link>
+        <h3 class="subtitle">A place to learn the basics</h3>
+      </div>
+
+
       <div class="searchbar">
-        <h1>Que recherchez-vous ?</h1>
+        <h2>Que recherchez-vous ?</h2>
         <form action="GET">
-          <input type="text" id="search" name="search" placeholder="Recherchez ce que vous voulez...">
+          <input type="text" id="search" v-model="q" name="search" placeholder="Recherchez ce que vous voulez...">
+          <div v-if="this. q && getFilteredTuto.length >0">
+            {{getFilteredTuto.length}} tuto<span v-if="getFilteredTuto.length >1">s</span> correspondant à votre recherche.
+          </div>
         </form>
       </div>
+
 
       <div class="proposition">
 
         <div class="last-trends">
-          <h2>Dernières tendances</h2>
-
-          <div class="container_video">
-
-            <figure class="left-video" v-for="tuto in listeTuto" :key="tuto.id">
-              <iframe class="left-video-iframe" :src="tuto.acf.url_video_tuto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-              <figcaption>par {{tuto.acf.publisher_tuto.nickname}} {{tuto.acf.post_date_tuto}}"</figcaption>
-            </figure>
+          <h2>Chercher les tutos que vous voulez !</h2>
 
             <div class="video_right">
 
-                <figure v-for="tuto in listeTuto" :key="tuto.id">
+                <router-link v-for="tuto in getFilteredTuto" :key="tuto.id" :to="'tuto/' + tuto.id">
                   <iframe :src="tuto.acf.url_video_tuto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                  <figcaption>par {{tuto.acf.publisher_tuto.nickname}} {{tuto.acf.post_date_tuto}}</figcaption>
-                </figure>
+                  <figcaption>voir la page du tuto</figcaption>
+                </router-link>
 
             </div>
           </div>
         </div>
 
 
-          <div class="populars">
-            <h2>Populaires</h2>
-
-            <div class="container_video">
-
-              <figure class="left-video" v-for="tuto in listeTuto" :key="tuto.id">
-                <iframe class="left-video-iframe" :src="tuto.acf.url_video_tuto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                <figcaption>par {{tuto.acf.publisher_tuto.nickname}} {{tuto.acf.post_date_tuto}}"</figcaption>
-              </figure>
-
-
-              <div class="video_right">
-                <figure v-for="tuto in listeTuto" :key="tuto.id">
-                  <iframe :src="tuto.acf.url_video_tuto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                  <figcaption>par {{tuto.acf.publisher_tuto.nickname}} {{tuto.acf.post_date_tuto}}</figcaption>
-                </figure>
-
-
-              </div>
-            </div>
-          </div>
-
-          <div class="dev">
-            <h2>Développement</h2>
-
-            <div class="container_video">
-
-              <figure class="left-video" v-for="tuto in listeTuto" :key="tuto.id">
-                <iframe class="left-video-iframe" :src="tuto.acf.url_video_tuto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                <figcaption>par {{tuto.acf.publisher_tuto.nickname}} {{tuto.acf.post_date_tuto}}"</figcaption>
-              </figure>
-
-
-              <div class="video_right">
-                <figure v-for="tuto in listeTuto" :key="tuto.id">
-                  <iframe :src="tuto.acf.url_video_tuto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                  <figcaption>par {{tuto.acf.publisher_tuto.nickname}} {{tuto.acf.post_date_tuto}}</figcaption>
-                </figure>
-
-              </div>
-            </div>
-
-          </div>
-
-        </div>
 
     </main>
 
@@ -93,7 +53,10 @@ export default {
     return{
       liste:[],
       listeTuto:[],
-      firstTuto:[]
+      firstTuto:[],
+      searchedTuto:[],
+      q: '',
+
     }
   },
 
@@ -116,6 +79,19 @@ export default {
 
   },
 
+
+
+  computed:{
+    getFilteredTuto()
+    {
+      return this.listeTuto.filter(tuto=>{
+        return tuto.acf.title_tuto.toLowerCase().includes(this.q.toLowerCase())
+      })
+
+    }
+  },
+
+
 };
 
 
@@ -124,6 +100,29 @@ export default {
 </script>
 <style scoped>
 h1{
+  color: #CD99AF;
+  font-family: Raleway,sans-serif;
+  font-weight: 900;
+  font-size: 85px;
+  grid-column: 2/5;
+  display: block;
+  width: fit-content;
+  margin-bottom: 0;
+  margin-top: 5px;
+}
+
+.subtitle{
+  color: #3373E5;
+  font-weight: 600;
+  font-style: italic;
+  font-size: 31px;
+  grid-column: 4/6;
+  width: fit-content;
+  margin-top: 0;
+  margin-left: 23%;
+}
+
+h2{
   color: #F1EDDD;
   font-family: Raleway,sans-serif;
   font-weight: 200;
@@ -195,15 +194,6 @@ h2{
 
 }
 
-.left-video{
-  width: calc(100% - 300px);
-  height: auto;
-}
-
-.left-video-iframe{
-  width: 100%;
-  height: 400px;
-}
 
 .video_right figure iframe {
   width: 400px;
@@ -213,7 +203,9 @@ h2{
 .video_right{
   overflow-y: auto;
   max-height: 500px;
-  width: 60%;
+  width: 30%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .container_video .left-video{
@@ -232,4 +224,47 @@ h2{
 #app > div > main > div.proposition > div.dev > div > figure:nth-child(1){
   display: block;
 }
+
+#app > div > main > div.proposition > div.last-trends > div > div > figure:nth-child(1){
+  display: none;
+}
+
+#app > div > main > div.proposition > div.populars > div > div > figure:nth-child(1){
+  display: none;
+}
+
+#app > div > main > div.proposition > div.dev > div > div > figure:nth-child(1){
+  display: none;
+}
+
+@media only screen and (min-width: 800px) {
+
+  .title-app{
+    display: none;
+  }
+
+}
+
+@media only screen and (max-width: 780px) {
+  h2 {
+    font-size: 25px;
+    padding: 0;
+  }
+
+  #search{
+    width: 100%;
+    height: 20px;
+    font-size: 14px;
+  }
+
+  .video_right{
+    width: 100%;
+  }
+
+  #app > div > main > div.proposition > div > h2{
+    margin-bottom: 10px;
+  }
+}
+
+
 </style>

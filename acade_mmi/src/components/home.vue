@@ -1,14 +1,20 @@
 <template>
   <main>
-    <h1>Acade'MMI </h1>
+
+    <div class="title-app">
+      <router-link to="/">
+        <h1>Acade'MMI </h1>
+      </router-link>
     <h3 class="subtitle">A place to learn the basics</h3>
+    </div>
+
 
       <div class="trends">
         <h2>Dernière tendances</h2>
 
 
 
-      <div class="first-vid" v-for="tuto in listeTuto" :key="tuto">
+      <div class="first-vid" v-for="tuto in firstTuto" :key="tuto">
 
 
 
@@ -24,12 +30,12 @@
         </div>
 
         <div class="description-fvid">
-          <h3>Titre</h3>
+          <h3>{{tuto.acf.title_tuto}}</h3>
           <p>
             {{tuto.acf.description_tuto}}
           </p>
 
-          <a href="#">En découvrir plus</a>
+          <router-link :to="'tuto/'+ tuto.id"><figcaption>En découvrir plus </figcaption></router-link>
 
         </div>
 
@@ -44,9 +50,9 @@
               <iframe :src="tuto.acf.url_video_tuto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
-              <figcaption>par {{tuto.acf.publisher_tuto.nickname}} {{tuto.acf.post_date_tuto}}</figcaption>
+              <router-link :to="'tuto/'+ tuto.id"><figcaption>voir la page du tuto </figcaption></router-link>
 
-
+<!--              {{tuto.acf.publisher_tuto.nickname}} {{tuto.acf.post_date_tuto}}-->
             </figure>
           </div>
 
@@ -76,6 +82,14 @@
         <div class="tri-img">
           <img src="../assets/images/home/icons.png" alt="Icones des thème de tuto">
         </div>
+
+            <div class="tri-img-mobile">
+              <ul>
+                <li><img src="../assets/images/home/icon1.png" alt="icon 1"></li>
+                <li><img src="../assets/images/home/icon2.png" alt="icon 2"></li>
+                <li><img src="../assets/images/home/icon3.png" alt="icon 3"></li>
+              </ul>
+            </div>
       </div>
 
 
@@ -108,7 +122,7 @@
 import param from "../param/param";
 
 export default {
-  name: 'listeSchoolSubject',
+  name: 'home',
   tuto: 'tuto',
   data(){
     return{
@@ -128,21 +142,21 @@ export default {
 
     .catch(error=>console.log(error))
 
-    axios.get(param.host+"tuto")
+    axios.get(param.host+"tuto?per_page=6")
       .then(response=>{
         this.listeTuto = response.data;
         console.log("Liste", this.listeTuto);
       })
       .catch(error=>console.log(error))
 
-    axios.get(param.host+"tuto")
-      .then(function (response){
+    axios.get(param.host+"tuto?per_page=1")
+      .then(response=>{
         this.firstTuto = response.data;
-        this.firstTuto = this.firstData[0].id
-        console.log("Liste", this.listeTuto);
       })
       .catch(error=>console.log(error))
   },
+
+
 
   computed: {
     listeOrderByName: function (){
@@ -229,12 +243,18 @@ export default {
 
   .trends figure{
     display: flex;
+
     flex-direction: column;
   }
+
+  #app > div > main > div.trends > div:nth-child(2) > div.main-vid > figure{
+    height: 350px;
+  }
   #app > div > main > div.trends > div.first-vid > div.main-vid > figure > iframe{
-    width: 655px;
-    height: 368px;
+    width: 100%;
+    height: 100%;
     border-radius: 10px;
+
   }
 
   #app > div > main > div.trends > div.first-vid> div.main-vid > figure > figcaption{
@@ -242,8 +262,8 @@ export default {
   }
 
   .trends ul li figure iframe{
-    width: 250px;
-    height: 145px;
+    width: 100%;
+    height: 100%;
     border-radius: 10px;
   }
 
@@ -259,6 +279,8 @@ export default {
   .main-vid{
     width: fit-content;
     height: fit-content;
+    min-width: 50%;
+    min-height: 350px;
   }
 
   .h-feed{
@@ -348,5 +370,122 @@ export default {
 
   .h-feed figure figcaption{
     color: #F1EDDD;
+  }
+
+  #app > div > main > div.trends > ul{
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+.schoolsub h3{
+  font-size: 35px;
+
+}
+
+  #app > div > main > div.trends > div:nth-child(2) > div.description-fvid{
+    width: 100%;
+  }
+
+  a{
+    text-decoration: none;
+  }
+
+  /*MEDIA QUERIES*/
+  @media only screen and (min-width: 800px) {
+
+    .tri-img-mobile{
+      display: none;
+    }
+
+  }
+
+  @media only screen and (max-width: 780px) {
+
+    h2{
+      font-size: 22px;
+    }
+
+    #app > div > main > div.trends > div:nth-child(2){
+      display: none;
+    }
+
+    #app > div > main > div.trends > ul > div:nth-child(1){
+      display: block;
+    }
+
+    .h-feed{
+      flex-direction: column;
+      max-height: 500px;
+    }
+    .schoolsub p{
+      display: none;
+    }
+
+    .tri-img{
+      display: none;
+    }
+
+    .tri-img-mobile ul{
+      margin: 0;
+      padding: 0;
+    }
+    .schoolsub h3{
+      font-size: 15px;
+      text-align: center;
+      vertical-align: center;
+      margin-left: 0;
+      margin-bottom: 0;
+
+
+    }
+
+    #app > div > main > div.triade > div > div.tri-text > div > p{
+      width: 100%;
+    }
+
+    #app > div > main > div.triade > div > div.tri-text > div> h3{
+      margin: 0;
+      font-size: 25px;
+    }
+    .first-vid, .tri-content{
+      flex-direction: column;
+    }
+
+
+    #app > div > main > div.tables > .school_subject> .schoolsub{
+      min-height: 50px;
+      width: 130px;
+      height: 90px;
+    }
+
+    .school_subject{
+      padding: 0;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+
+    .tri-content{
+      padding: 10px;
+    }
+    #app > div > main > div.triade > div > div.tri-text > div > h3{
+      font-size: 20px;
+      margin-bottom: 10px;
+      margin-left: 30px;
+    }
+    .tri-text{
+      width: 100%;
+    }
+
+    #app > div > main > div.triade > div > div.tri-text > div > p{
+      margin-left: auto;
+      font-size: 14px;
+      width: 80%;
+      margin-right: auto;
+    }
+
+    .partial-border{
+      margin-bottom: 40px;
+    }
+
   }
 </style>

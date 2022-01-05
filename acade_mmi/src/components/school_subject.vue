@@ -1,19 +1,16 @@
 <template>
 
   <main>
-    <h1>Acade'MMI </h1>
-    <h3 class="subtitle">A place to learn the basics</h3>
-    <div class="school_div">
+    <div class="title-app">
+      <router-link to="/">
+        <h1>Acade'MMI </h1>
+      </router-link>
+      <h3 class="subtitle">A place to learn the basics</h3>
+    </div>
 
 
 
-        <svg xmlns="http://www.w3.org/2000/svg" width="119" height="125" viewBox="0 0 119 125">
-          <g id="Design_Paragraphe_CN" data-name="Design Paragraphe CN" transform="translate(4 125) rotate(-90)">
-            <path id="Tracé_8" data-name="Tracé 8" d="M0,0H125" transform="translate(0 2)" fill="none" stroke="#685ddf" stroke-width="12"/>
-            <line id="Ligne_14" data-name="Ligne 14" y2="115" transform="translate(119)" fill="none" stroke="#685ddf" stroke-width="12"/>
-          </g>
-        </svg>
-
+    <div class="the-schoolsub">
 
         <div class="school_text">
           <h2>{{school_subject.acf.name_school_subject}}</h2>
@@ -22,23 +19,15 @@
           </p>
         </div>
 
-        <svg xmlns="http://www.w3.org/2000/svg" width="119" height="125" viewBox="0 0 119 125">
-          <g id="Design_Paragraphe_CN" data-name="Design Paragraphe CN" transform="translate(115) rotate(90)">
-            <path id="Tracé_8" data-name="Tracé 8" d="M0,0H125" transform="translate(0 2)" fill="none" stroke="#5146c6" stroke-width="12"/>
-            <line id="Ligne_14" data-name="Ligne 14" y2="115" transform="translate(119)" fill="none" stroke="#5146c6" stroke-width="12"/>
-          </g>
-        </svg>
 
-      <div class="container">
+      <div class="h-feed">
         <li v-for="tuto in tutoFilter" :key="tuto.id">
           <iframe class="left-video-iframe" :src="tuto.acf.url_video_tuto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          <figcaption>par {{tuto.acf.publisher_tuto.nickname}} {{tuto.acf.post_date_tuto}}</figcaption>
+          <router-link :to="'tuto/'+ tuto.id"><figcaption>voir la page du tuto</figcaption></router-link>
         </li>
 
 
       </div>
-
-
 
 
     </div>
@@ -133,7 +122,7 @@ h1{
 .container .school_text h2{
   font-family: Raleway, sans-serif;
   font-weight: 700;
-  font-size: 54px;
+  font-size: 44px;
   text-align: left;
 }
 
@@ -141,25 +130,80 @@ h1{
   font-size: 24px;
   font-weight: 700;
   font-style: italic;
-  width: 30%;
+  width: 80%;
   text-align: left;
 
 }
 
 .container .school_text{
   color: #F1EDDD;
-  width: 100%;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 50px;
 }
 
-.school_div{
+
+
+.the-schoolsub{
   background-color: #211F1F;
+  border-radius: 20px;
+  margin-bottom: 175px;
 }
-.school_text:before {
-  display: block;
-  content: ' ';
-  background-image: url('');
-  background-size: 28px 28px;
-  height: 28px;
-  width: 28px;
+
+.h-feed{
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-x: auto;
+  margin-top: 70px;
 }
+
+.h-feed li{
+  list-style: none;
+  margin-left: 30px;
+
+}
+
+.h-feed figcaption{
+  color: #F1EDDD;
+}
+
+a{
+  text-decoration: none;
+}
+.h-feed figure figcaption{
+  color: #F1EDDD;
+}
+
+
+@media only screen and (max-width: 780px){
+  .h-feed{
+    flex-direction: column;
+    max-height: 500px;
+    overflow-x: hidden;
+    width: 100%;
+    padding-bottom: 10px;
+  }
+
+  .h-feed li{
+    margin-left: 0;
+  }
+
+  #app > div > main > div.the-schoolsub > div.school_text > h2{
+    font-size: 25px;
+  }
+  .container .school_text p{
+    font-size: 15px;
+    width: 100%;
+  }
+
+  .container .school_text{
+    padding-top: 25px;
+  }
+
+}
+
 </style>

@@ -1,11 +1,11 @@
 export default {
-  host : 'http://localhost/acade_mmi/wordpress/wp-json/wp/v2/',
+  host : 'https://acade-mmi.maximemalatier.fr/wp-json/wp/v2/',
 
-  hostTuto: 'http://localhost/acade_mmi/wordpress/wp-json/tuto/v1/',
+  hostTuto: 'https://acade-mmi.maximemalatier.fr/wp-json/tuto/v1/',
 
-  auth: 'http://localhost/acade_mmi/wordpress/wp-json/jwt-auth/v1/',
-  user: 'admin1709',
-  psw: '&RWW@qvK65kkFBasIG',
+    auth: 'https://acade-mmi.maximemalatier.fr/wp-json/jwt-auth/v1/',
+    user: 'admin1709',
+    psw: '&RWW@qvK65kkFBasIG',
 
   //Différent School Subject
 
