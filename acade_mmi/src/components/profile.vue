@@ -20,7 +20,7 @@
           </div>
 
           <div class="publish2">
-            <a href="">Comment publier un tuto sur le site ?</a>
+            <a href="https://www.youtube.com/watch?v=STsXQq3bMVM&">Comment publier un tuto sur le site ?</a>
           </div>
         </div>
       </div>

@@ -11,7 +11,7 @@
       </div>
 
       <div v-if="utilisateur.token == null" class="inscription">
-        <a href="https://acade-mmi.maximemalatier.fr/register">Inscrivez vous !</a>
+        <a href="https://acade-mmi.maximemalatier.fr/inscription">Inscrivez vous !</a>
       </div>
 
       <div class="navbar-mobile" v-bind:class="{visibleMobile: isActiveMobile}">
@@ -134,7 +134,7 @@
 
 
                   <div class="form-box">
-                    <input type="text" class="form-control" placeholder="Mot de passe" v-model="utilisateur.password">
+                    <input type="password" class="form-control" placeholder="Mot de passe" v-model="utilisateur.password">
                   </div>
 
 

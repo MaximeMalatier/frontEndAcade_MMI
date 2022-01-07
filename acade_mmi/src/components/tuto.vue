@@ -118,6 +118,8 @@ h3{
 .first-vid{
   min-height: 400px;
   max-height: 700px;
+  margin-top: 115px;
+  margin-bottom: 240px;
 }
 
 #app > div > main > div.tuto > div > div.description-fvid > p{

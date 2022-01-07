@@ -77,7 +77,8 @@ p{
 .a_propos{
   background-color: #211F1F;
   border-radius: 20px;
-  margin-bottom: 100px;
+  margin-bottom: 225px;
+  height: 500px;
 }
 
 @media only screen and (max-width: 780px) {

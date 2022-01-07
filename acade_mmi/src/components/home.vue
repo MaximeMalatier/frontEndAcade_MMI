@@ -362,6 +362,7 @@ export default {
 
   #app > div > main > div.trends > div:nth-child(2){
     display: flex;
+    margin-top: 50px;
   }
 
   #app > div > main > div.trends > ul > div:nth-child(1){

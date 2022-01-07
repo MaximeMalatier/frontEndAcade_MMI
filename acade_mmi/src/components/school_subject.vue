@@ -23,7 +23,7 @@
       <div class="h-feed">
         <li v-for="tuto in tutoFilter" :key="tuto.id">
           <iframe class="left-video-iframe" :src="tuto.acf.url_video_tuto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          <router-link :to="'tuto/'+ tuto.id"><figcaption>voir la page du tuto</figcaption></router-link>
+          <router-link :to="'/tuto/'+ tuto.id"><figcaption>voir la page du tuto</figcaption></router-link>
         </li>
 
 
